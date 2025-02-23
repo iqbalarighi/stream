@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\KaryawanController;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,4 +27,11 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+});
+
+Route::get('/test',[Controller::class, 'test'])->middleware('auth')->name('test');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/absen',[KaryawanController::class, 'index'])->name('absen');
+    Route::get('/absen/create',[KaryawanController::class, 'create']);
 });
